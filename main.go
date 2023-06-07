@@ -50,6 +50,7 @@ func main() {
 		fmt.Println("Error getting response from API:", err)
 		return
 	}
+	defer response.Body.Close()
 
 	responseData, err := io.ReadAll(response.Body)
 	if err != nil {
@@ -77,6 +78,7 @@ func main() {
 		fmt.Println("Error getting response from API:", err)
 		return
 	}
+	defer forecastResponse.Body.Close()
 
 	forecastData, err := io.ReadAll(forecastResponse.Body)
 	if err != nil {
