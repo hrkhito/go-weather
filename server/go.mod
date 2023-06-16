@@ -1,4 +1,4 @@
-module github.com/hrk_hito/go-rates
+module github.com/hrk_hito/go-weather
 
 go 1.20
 
