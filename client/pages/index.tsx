@@ -1,10 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+
+type WeatherItem = {
+  temperature: number;
+  condition: string;
+};
+
+type ForecastItem = {
+  time: string;
+  temperature: number;
+  condition: string;
+};
 
 export default function Home() {
-  const [city, setCity] = useState("");
-  const [weather, setWeather] = useState(null);
-  const [forecast, setForecast] = useState(null);
-  const [error, setError] = useState(null);
+  const [city, setCity] = useState<string>("");
+  const [weather, setWeather] = useState<WeatherItem | null>(null);
+  const [forecast, setForecast] = useState<ForecastItem[] | null>(null);
+  const [error, setError] = useState<string | null>(null);  
 
   const getWeatherData = () => {
     setWeather(null);
@@ -40,7 +51,7 @@ export default function Home() {
       .catch(error => setError(error.message));
   };
 
-  const handleCityChange = (event) => {
+  const handleCityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCity(event.target.value);
   };
 
@@ -60,7 +71,7 @@ export default function Home() {
       {forecast && (
         <div>
           <h2>Forecast</h2>
-          {forecast.map((item, index) => (
+          {forecast.map((item: ForecastItem, index: number) => (
             <div key={index}>
               <p>Time: {item.time}</p>
               <p>Temperature: {item.temperature}</p>
